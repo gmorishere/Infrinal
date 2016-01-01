@@ -216,11 +216,11 @@ function create_config( )
     "set",
     "get",
     "broadcast",
-    "download_media",
+    "plugins",
     "invite",
     "all"
     },
-    sudo_users = {110626080,103649648,0,tonumber(our_id)},--Sudo users
+    sudo_users = {109722284},--Sudo users
     disabled_channels = {},
     realm = {},--Realms Id
     moderation = {data = 'data/moderation.json'},
