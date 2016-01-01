@@ -712,7 +712,7 @@ local function run(msg, matches)
       savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group settings ")
       return show_group_settingsmod(msg, data, target)
     end
-    if matches[1] == 'newlink' then
+    if matches[1] == 'nlink' then
       if not is_momod(msg) then
         return "For moderators only!"
       end
@@ -729,16 +729,16 @@ local function run(msg, matches)
       savelog(msg.to.id, name_log.." ["..msg.from.id.."] revoked group link ")
       return export_chat_link(receiver, callback, true)
     end
-    if matches[1] == 'link' then
+    if matches[1] == 'glink' then
       if not is_momod(msg) then
         return "For moderators only!"
       end
       local group_link = data[tostring(msg.to.id)]['settings']['set_link']
       if not group_link then 
-        return "Create a link using /newlink first !"
+        return "Create a link using /nlink first !"
       end
        savelog(msg.to.id, name_log.." ["..msg.from.id.."] requested group link ["..group_link.."]")
-      return "Group link:\n"..group_link
+      return "The invite link for This group is:\n"..group_link
     end
     if matches[1] == 'setowner' then
       if not is_owner(msg) then
@@ -750,7 +750,7 @@ local function run(msg, matches)
       local text = matches[2].." added as owner"
       return text
     end
-    if matches[1] == 'owner' then
+    if matches[1] == 'mleader' then
       local group_owner = data[tostring(msg.to.id)]['set_owner']
       if not group_owner then 
         return "no owner,ask admins in support groups to set owner for your group"
@@ -758,7 +758,7 @@ local function run(msg, matches)
       savelog(msg.to.id, name_log.." ["..msg.from.id.."] used /owner")
       return "Group owner is ["..group_owner..']'
     end
-    if matches[1] == 'setgpowner' then
+    if matches[1] == 'spromote' then
       local receiver = "chat#id"..matches[2]
       if not is_admin(msg) then
         return "For admins only!"
@@ -850,16 +850,16 @@ return {
   "^[!/](demote) (.*)$",
   "^[!/](set) ([^%s]+) (.*)$",
   "^[!/](lock) (.*)$",
-  "^[!/](setowner) (%d+)$",
-  "^[!/](owner)$",
+  "^[!/](rpromote) (%d+)$",
+  "^[!/](mleader)$",
   "^[!/](res) (.*)$",
-  "^[!/](setgpowner) (%d+) (%d+)$",-- (group id) (owner id)
+  "^[!/](setowner) (%d+) (%d+)$",-- (group id) (owner id)
   "^[!/](unlock) (.*)$",
   "^[!/](setflood) (%d+)$",
   "^[!/](settings)$",
   "^[!/](modlist)$",
-  "^[!/](newlink)$",
-  "^[!/](link)$",
+  "^[!/](nlink)$",
+  "^[!/](glink)$",
   "%[(photo)%]",
   "^!!tgservice (.+)$",
   },
